@@ -50,7 +50,7 @@ angular.module('knowifyTestApp')
         	newCompany.id = $scope.companies.length + 1;
         	$scope.companies.push(newCompany);
         	$scope.company = {};
-        	console.log('companies array after adding new company: ', $scope.companies);
+            $scope.submitted = false;
         };
     };
 
