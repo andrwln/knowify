@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="jumbotron">
+      <h3>Search:</h3>
+      <input type="text"
+             placeholder="Search for company contacts here..."
+             ng-model="selected"
+             typeahead="contact as company.contact + ' - ' + company.name for company in companies | filter:$viewValue | limitTo:5"
+             class="form-control"
+             typeahead-on-select="populateForm($item)">
+      </div><br>
+
+      <form class="form" name="form" ng-submit="addCompany(form)" novalidate>
+        <div class="form-group">
+
+          <label>Company Name</label>
+          <input class="form-control"
+                 type="text"
+                 name="name"
+                 ng-model="company.name"
+                 ng-maxlength="30"
+                 required>
+                 <span ng-show="form.name.$error.required && submitted">This field is required!</span>
+                 <span ng-show="form.name.$error.maxlength && submitted">Company name is too long.</span><br>
+
+          <label>Contact Name</label>
+          <input class="form-control"
+                 type="text"
+                 name="contact"
+                 ng-model="company.contact"
+                 ng-maxlength="30"
+                 required>
+                 <span ng-show="form.contact.$error.required && submitted">This field is required!</span>
+                 <span ng-show="form.contact.$error.maxlength && submitted">Contact name is too long.</span><br>
+
+          <label>Address</label>
+          <input class="form-control" 
+                 type="text"
+                 name="address"
+                 ng-model="company.address"
+                 ng-maxlength="50">
+                 <span ng-show="form.address.$error.maxlength && submitted">Address is too long.</span><br>
+
+          <label>Email</label>
+          <input class="form-control"
+                 type="email"
+                 name="email"
+                 ng-model="company.email"
+                 ng-maxlength="30">
+                 <span ng-show="form.email.$error.maxlength && submitted">Email is too long.</span>
+                 <span ng-show="form.email.$error.email && submitted">Please enter a valid email.</span><br>
+
+          <label>Phone Number</label>
+          <input class="form-control"
+                 type="string"
+                 name="phone"
+                 ng-model="company.phone"
+                 ng-minlength="10"
+                 ng-maxlength="10">
+                 <span ng-show="form.phone.$error.maxlength || form.phone.$error.minlength && submitted">Please enter valid ten digit phone number.</span><br>
+
+          <label>Website</label>
+          <input class="form-control"
+                 type="url"
+                 name="website"
+                 placeholder="http://..."
+                 ng-model="company.url"
+                 ng-maxlength="50">
+                 <span ng-show="form.website.$error.url && submitted">Not a valid web address.</span>
+                 <span ng-show="form.website.$error.maxlength && submitted">Address is too long.</span>
+
+        </div>
+        <span ng-show="atLeast">Please enter at least one of the following: Email, Phone, or Website.</span><br>
+        <button class="btn btn-success">Add Company</button>
+
+      </form><br>
+        <button class="btn btn-danger" ng-click='clearForm()'>Clear Form</button>
+
+    </div>
+  </div>
+</div><br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <table st-table="companies" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Contact Name</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Website</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="company in companies">
+          <td>{{company.name}}</td>
+          <td>{{company.contact}}</td>
+          <td>{{company.address}}</td>
+          <td>{{company.email}}</td>
+          <td>{{company.phone | phoneNumber}}</td>
+          <td>{{company.url}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
