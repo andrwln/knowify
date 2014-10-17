@@ -13,6 +13,7 @@ angular
     'ngAnimate',
     'ngCookies',
     'ngResource',
+    'ngMockE2E',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
