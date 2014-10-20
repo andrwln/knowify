@@ -9,29 +9,10 @@
  */
 angular.module('knowifyTestApp')
   .controller('MainCtrl', function ($scope, $http) {
-    $scope.companies = [
-        {
-            id: 1,
-            name: "Fullstack Academy",
-            contact: "Andrew Lin",
-            address: "160 Pearl Street",
-            email: "andrew.lin90@gmail.com",
-            phone: "6264977166",
-            url: "http://www.fullstackacademy.com"
-        },
-        {
-            id: 2,
-            name: "Knowify",
-            contact: "Marc Visent",
-            address: "2 Wall Street",
-            email: "mvisent@knowify.com",
-            phone: "1234567890",
-            url: "http://www.knowify.com"  
-        }
-    ];
-    // $http.get('/api/companies/').success(function(companies) {
-    //     $scope.companies = companies;
-    // });
+    
+    $http.get('/api/companies/').success(function(companies) {
+        $scope.companies = companies;
+    });
 
     $scope.company = {};
 
